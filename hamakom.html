@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>המקום · רוזמרין</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .place-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-m);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-m);
+    }
+    .place-card {
+      padding: var(--space-m);
+      border: var(--rule);
+      background: var(--sand-light);
+    }
+    .place-card h3 { margin-bottom: 0.5rem; font-size: 1.4rem; }
+    .place-card p { color: var(--basalt-soft); font-size: 0.95rem; }
+    .place-card .distance {
+      display: inline-block;
+      margin-top: var(--space-s);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+    }
+    .stargazing {
+      background: var(--night);
+      color: var(--sand-light);
+      padding: var(--space-xl) var(--space-m);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: var(--space-xl);
+    }
+    .stargazing::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle, var(--star) 0.7px, transparent 1px),
+        radial-gradient(circle, var(--star) 1px, transparent 1.5px),
+        radial-gradient(circle, var(--star) 0.5px, transparent 1px);
+      background-size: 90px 90px, 160px 160px, 60px 60px;
+      background-position: 0 0, 40px 70px, 25px 30px;
+      opacity: 0.7;
+      animation: twinkle 8s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50%      { opacity: 0.9; }
+    }
+    .stargazing-content { position: relative; z-index: 2; max-width: 50ch; margin: 0 auto; }
+    .stargazing h2 { color: var(--sand-light); }
+    .stargazing p { color: rgba(244, 232, 200, 0.75); margin-top: var(--space-s); }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html" aria-current="page">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="framed-hero" aria-labelledby="page-heading">
+    <div class="scene-noon" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="framed-hero-content">
+      <div class="ornament" aria-hidden="true">
+        <span class="ornament-line"></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-line"></span>
+      </div>
+      <span class="eyebrow">צהריים בערבה</span>
+      <h1 id="page-heading">המקום</h1>
+      <p>מושב עין יהב, ערבה תיכונה — שעתיים מתל אביב, מאות אלפי כוכבים בלילה.</p>
+    </div>
+  </section>
+
+  <section class="stub-body">
+    <p class="lead">עין יהב יושבת בערבה התיכונה — שעתיים מירושלים, שעתיים וחצי מתל אביב. סביבכם בריכה, סכר, מסעדות מקומיות, ואלפי דונמים של שקט.</p>
+  </section>
+
+  <div class="place-grid">
+    <div class="place-card">
+      <h3>הבריכה הגדולה</h3>
+      <p>בריכת המושב פתוחה לאורחי הצימרים. חמש דקות הליכה.</p>
+      <span class="distance">5 דק׳</span>
+    </div>
+    <div class="place-card">
+      <h3>סכר ציחור</h3>
+      <p>פינת פיקניק שקטה מעל מאגר מים. שקיעות מצוינות.</p>
+      <span class="distance">15 דק׳ נסיעה</span>
+    </div>
+    <div class="place-card">
+      <h3>מסעדות מקומיות</h3>
+      <p>מסעדת ״פונדק 90״, ״הבית של בנג׳י״, ועוד. ממליצים — ניתן לתאם הזמנה.</p>
+      <span class="distance">10–20 דק׳</span>
+    </div>
+    <div class="place-card">
+      <h3>טיולי מדבר</h3>
+      <p>נחל ברק, הר עמיר, מצפה שלמה. מסלולים לכל רמה.</p>
+      <span class="distance">15–40 דק׳</span>
+    </div>
+  </div>
+
+  <section class="stargazing">
+    <div class="stargazing-content">
+      <p class="eyebrow" style="color: rgba(244,232,200,0.6);">לילה</p>
+      <h2>אחד האזורים החשוכים בארץ.</h2>
+      <p>בלי זיהום אור. בלילה צלול תוכלו לראות את שביל החלב בעין בלתי מזוינת. מומלץ לצאת אל הדק אחרי 22:00, להישכב על הגב, ולחכות.</p>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>בואו לראות במו עיניכם</h2>
+    <div class="cta-buttons">
+      <a href="hazmana.html" class="btn btn-primary">לעמוד ההזמנה</a>
+      <a href="tel:0523666489" class="btn">חייגו · 052-3666489</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+                  </a>
+        <p>ארבעה צימרים וקליניקת ספא בעין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

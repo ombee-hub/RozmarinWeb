@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ספא וטיפולים · רוזמרין</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .menu { max-width: 720px; margin: 0 auto; padding: 0 var(--space-m); }
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-m);
+      padding: var(--space-m) 0;
+      border-bottom: var(--rule);
+      align-items: baseline;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item h3 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+    .menu-item p { color: var(--basalt-soft); max-width: 50ch; }
+    .menu-meta { text-align: left; white-space: nowrap; font-family: 'Assistant', sans-serif; font-weight: 300; }
+    .menu-meta .price { font-size: 1.4rem; color: var(--clay-dark); }
+    .menu-meta .duration { font-size: 0.85rem; color: var(--basalt-soft); display: block; margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html" aria-current="page">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="framed-hero" aria-labelledby="page-heading">
+    <div class="scene-evening" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="framed-hero-content">
+      <div class="ornament" aria-hidden="true">
+        <span class="ornament-line"></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-line"></span>
+      </div>
+      <span class="eyebrow">ערב ברוזמרין</span>
+      <h1 id="page-heading">ספא וטיפולים</h1>
+      <p>קליניקת טיפולים מקצועית בתוך המתחם — שמן חם, ידיים מנוסות, ושקט.</p>
+    </div>
+  </section>
+
+  <section class="stub-body">
+    <p class="lead">קליניקת טיפולים מקצועית בתוך המתחם. ללא מוזיקת רקע מלאכותית, ללא תאורה כחולה — רק שמן חם, ידיים מנוסות, ושקט.</p>
+  </section>
+
+  <div class="menu">
+    <div class="menu-item">
+      <div>
+        <h3>עיסוי שוודי קלאסי</h3>
+        <p>תנועות זרימה ארוכות, לחץ בינוני. לשחרור כללי אחרי נסיעה ארוכה.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪320</span>
+        <span class="duration">60 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>עיסוי רקמות עמוק</h3>
+        <p>עבודה ממוקדת בשרירים תפוסים — צוואר, גב תחתון, כתפיים.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪380</span>
+        <span class="duration">60 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>אבני בזלת חמות</h3>
+        <p>אבנים מחוממות מהאזור, נחות על נקודות מפתח. עומק חום שלא מקבלים מידיים בלבד.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪420</span>
+        <span class="duration">75 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>רפלקסולוגיה</h3>
+        <p>עבודה על נקודות בכפות הרגליים. לשחרור עמוק כשכל הגוף עייף.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪300</span>
+        <span class="duration">50 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>עיסוי משולב</h3>
+        <p>שילוב טכניקות לפי הצורך באותו יום. שיחה קצרה לפני, ואז עובדים.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪400</span>
+        <span class="duration">75 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>עיסוי לנשים בהריון</h3>
+        <p>תנוחה ולחץ מותאמים. מהשליש השני בלבד, באישור הרופא/ה.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪360</span>
+        <span class="duration">60 דקות</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div>
+        <h3>נרות הופי לאוזניים</h3>
+        <p>טיפול עתיק להקלה על לחצים באוזניים ובסינוסים. רגוע במיוחד.</p>
+      </div>
+      <div class="menu-meta">
+        <span class="price">₪220</span>
+        <span class="duration">40 דקות</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="testimonial">
+    <span class="quote-mark">״</span>
+    <blockquote>
+      בפעם הראשונה הזמנתי טיפול אחד. בפעם השנייה הגעתי בשביל הטיפולים, והצימר היה בונוס.
+    </blockquote>
+    <cite>— מירב, באר שבע</cite>
+  </section>
+
+  <section class="cta-strip">
+    <h2>לתיאום טיפול</h2>
+    <p>אנחנו עונים בעצמנו ומסבירים מה מתאים לכם. לא צריך לדעת מראש.</p>
+    <div class="cta-buttons">
+      <a href="tel:0523666489" class="btn btn-primary">חייגו · 052-3666489</a>
+      <a href="https://wa.me/972523666489" class="btn">ווטסאפ</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+                  </a>
+        <p>ארבעה צימרים וקליניקת ספא בעין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

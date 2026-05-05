@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יצירת קשר · רוזמרין</title>
+  <meta name="description" content="יצירת קשר עם מתחם רוזמרין בעין יהב. טלפון, ווטסאפ, אימייל, שעות פעילות, מפה והגעה." />
+
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ===== Contact-page specific — accessible & spacious ===== */
+
+    /* Hero — framed banner with scenic background */
+    .contact-hero {
+      position: relative;
+      min-height: 420px;
+      height: 55vh;
+      max-height: 540px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-xl);
+    }
+    .contact-hero .scene-noon {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .contact-hero .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(26, 31, 42, 0.3) 0%, rgba(26, 31, 42, 0.6) 100%);
+      z-index: 1;
+    }
+    .contact-hero-frame {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-l) clamp(2rem, 8vw, 5rem);
+      border: 1px solid rgba(244, 232, 200, 0.35);
+      max-width: 640px;
+      width: calc(100% - 2 * var(--space-m));
+      text-align: center;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      background: rgba(26, 31, 42, 0.12);
+    }
+    .contact-hero-frame::before,
+    .contact-hero-frame::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(244, 232, 200, 0.7);
+      background: rgba(26, 31, 42, 0.35);
+    }
+    .contact-hero-frame::before {
+      top: -7px;
+      right: -7px;
+      border-bottom: none;
+      border-left: none;
+    }
+    .contact-hero-frame::after {
+      bottom: -7px;
+      left: -7px;
+      border-top: none;
+      border-right: none;
+    }
+    .contact-hero-frame .eyebrow {
+      display: block;
+      color: rgba(244, 232, 200, 0.85);
+      margin-bottom: var(--space-m);
+      font-size: 0.82rem;
+      letter-spacing: 0.35em;
+    }
+    .contact-hero-frame h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 200;
+      color: var(--sand-light);
+      letter-spacing: 0.02em;
+      margin-bottom: var(--space-m);
+      line-height: 1;
+    }
+    .contact-hero-frame .frame-divider {
+      width: 50px;
+      height: 1px;
+      background: rgba(244, 232, 200, 0.5);
+      margin: 0 auto var(--space-m);
+    }
+    .contact-hero-frame p {
+      color: rgba(244, 232, 200, 0.88);
+      font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+      max-width: 42ch;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Three primary contact methods — generous, equal weight */
+    .channels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-m);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-m) var(--space-xl);
+    }
+    .channel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-s);
+      padding: var(--space-l) var(--space-m);
+      background: var(--sand-light);
+      border: 1px solid rgba(61, 53, 48, 0.1);
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+      min-height: 280px;
+      justify-content: center;
+    }
+    .channel:hover {
+      transform: translateY(-4px);
+      border-color: var(--rosemary);
+    }
+    .channel-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--sand-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s var(--ease);
+      margin-bottom: var(--space-xs);
+    }
+    .channel:hover .channel-icon { background: var(--rosemary); }
+    .channel-icon svg {
+      width: 30px; height: 30px;
+      stroke: var(--basalt);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.4s var(--ease);
+    }
+    .channel:hover .channel-icon svg { stroke: var(--sand-light); }
+    .channel-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      font-weight: 600;
+    }
+    .channel-value {
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      color: var(--basalt);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    .channel-note {
+      font-size: 0.95rem;
+      color: var(--basalt-soft);
+      max-width: 24ch;
+    }
+
+    /* Hours + Map combined section */
+    .meet-us {
+      background: var(--sand-light);
+      padding: var(--space-xl) var(--space-m);
+      border-top: 1px solid rgba(61, 53, 48, 0.1);
+      border-bottom: 1px solid rgba(61, 53, 48, 0.1);
+    }
+    .meet-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--space-l);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .meet-info { padding: var(--space-s) 0; }
+    .meet-info .eyebrow { display: block; margin-bottom: var(--space-s); }
+    .meet-info h2 {
+      margin-bottom: var(--space-m);
+      font-weight: 300;
+    }
+
+    .info-card {
+      margin-bottom: var(--space-l);
+    }
+    .info-card:last-child { margin-bottom: 0; }
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-s);
+      color: var(--basalt);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .info-card h3 svg {
+      width: 20px; height: 20px;
+      stroke: var(--rosemary);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hours-list {
+      list-style: none;
+      max-width: 320px;
+    }
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+      border-bottom: 1px dashed rgba(61, 53, 48, 0.12);
+      font-size: 0.95rem;
+    }
+    .hours-list li:last-child { border-bottom: none; }
+    .hours-list .day { color: var(--basalt-soft); letter-spacing: 0.05em; }
+    .hours-list .time { color: var(--basalt); font-weight: 500; }
+
+    address.location {
+      font-style: normal;
+      line-height: 1.85;
+      color: var(--basalt-soft);
+      max-width: 36ch;
+    }
+    address.location strong { color: var(--basalt); font-weight: 500; }
+
+    .meet-map {
+      position: sticky;
+      top: 100px;
+    }
+    .map-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border: 1px solid rgba(61, 53, 48, 0.1);
+      overflow: hidden;
+      background: var(--sand-deep);
+    }
+    .map-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: saturate(0.85);
+    }
+    .map-actions {
+      display: flex;
+      gap: var(--space-s);
+      margin-top: var(--space-m);
+      flex-wrap: wrap;
+    }
+
+    /* ========= Main contact section — top of page, organized ========= */
+
+    .main-contact {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-m) var(--space-xl);
+    }
+    .main-contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: var(--space-l);
+      align-items: start;
+    }
+
+    /* RIGHT side: stacked compact channel cards */
+    .channels-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-s);
+    }
+    .channels-intro {
+      margin-bottom: var(--space-s);
+    }
+    .channels-intro .eyebrow { display: block; margin-bottom: var(--space-s); }
+    .channels-intro h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+      font-weight: 200;
+      line-height: 1.25;
+      margin-bottom: var(--space-s);
+    }
+    .channels-intro p {
+      color: var(--basalt-soft);
+      line-height: 1.75;
+      max-width: 36ch;
+    }
+
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-m);
+      padding: var(--space-m);
+      background: var(--sand-light);
+      border: 1px solid rgba(61, 53, 48, 0.1);
+      transition: all 0.3s var(--ease);
+      position: relative;
+    }
+    .channel-item.featured {
+      background: linear-gradient(135deg, var(--rosemary) 0%, #5C6B4D 100%);
+      border-color: transparent;
+    }
+    .channel-item:hover {
+      border-color: var(--rosemary);
+      transform: translateX(-4px);
+    }
+    .channel-item.featured:hover {
+      transform: translateX(-4px);
+      filter: brightness(1.05);
+    }
+    .channel-item .channel-icon-small {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--sand-deep);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s var(--ease);
+    }
+    .channel-item.featured .channel-icon-small {
+      background: rgba(244, 232, 200, 0.18);
+    }
+    .channel-item:hover .channel-icon-small { background: var(--rosemary); }
+    .channel-item.featured:hover .channel-icon-small { background: rgba(244, 232, 200, 0.28); }
+    .channel-item .channel-icon-small svg {
+      width: 22px; height: 22px;
+      stroke: var(--basalt);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s var(--ease);
+    }
+    .channel-item.featured .channel-icon-small svg { stroke: var(--sand-light); }
+    .channel-item:hover .channel-icon-small svg { stroke: var(--sand-light); }
+    .channel-item .channel-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .channel-item .channel-label-small {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      font-weight: 500;
+    }
+    .channel-item.featured .channel-label-small { color: rgba(244, 232, 200, 0.8); }
+    .channel-item .channel-value-small {
+      font-size: 1.15rem;
+      color: var(--basalt);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    .channel-item.featured .channel-value-small { color: var(--sand-light); }
+    .channel-item .channel-note-small {
+      font-size: 0.82rem;
+      color: var(--basalt-soft);
+      margin-top: 0.1rem;
+    }
+    .channel-item.featured .channel-note-small { color: rgba(244, 232, 200, 0.7); }
+    .channel-item .channel-arrow {
+      width: 18px; height: 18px;
+      stroke: var(--basalt-soft);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s, transform 0.3s;
+      flex-shrink: 0;
+    }
+    .channel-item.featured .channel-arrow { stroke: rgba(244, 232, 200, 0.7); }
+    .channel-item:hover .channel-arrow {
+      stroke: var(--rosemary);
+      transform: translateX(-3px);
+    }
+    .channel-item.featured:hover .channel-arrow { stroke: var(--sand-light); }
+
+    /* RIGHT side: friendly form card */
+    .letter-form {
+      background: var(--sand-light);
+      padding: var(--space-l);
+      border: 1px solid rgba(61, 53, 48, 0.08);
+    }
+    .letter-form .form-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      margin-bottom: var(--space-s);
+    }
+    .letter-form h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .letter-form > p.lead-line {
+      color: var(--basalt-soft);
+      margin-bottom: var(--space-l);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .form-stack { display: flex; flex-direction: column; gap: var(--space-m); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-m); }
+
+    .field-block { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field-block label {
+      font-size: 0.9rem;
+      color: var(--basalt-soft);
+      font-weight: 400;
+    }
+    .field-block label .required {
+      color: var(--clay-dark);
+      margin-right: 0.2rem;
+    }
+    .field-block input,
+    .field-block textarea,
+    .field-block select {
+      padding: 0.85rem 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(61, 53, 48, 0.2);
+      font: inherit;
+      color: var(--basalt);
+      direction: rtl;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .field-block textarea {
+      padding: 0.85rem 0.5rem;
+      border: 1px solid rgba(61, 53, 48, 0.15);
+      background: var(--sand);
+      resize: vertical;
+      min-height: 110px;
+    }
+    .field-block input:focus,
+    .field-block textarea:focus,
+    .field-block select:focus {
+      outline: none;
+      border-color: var(--rosemary);
+    }
+    .field-block input:focus,
+    .field-block select:focus { border-bottom-width: 2px; }
+    .field-block textarea:focus { box-shadow: 0 0 0 3px rgba(107, 122, 90, 0.12); }
+
+    .form-submit {
+      margin-top: var(--space-m);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+    }
+    .form-submit button {
+      width: 100%;
+      min-height: 56px;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+    .form-submit button svg {
+      width: 18px; height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s var(--ease);
+    }
+    .form-submit button:hover svg { transform: translateX(-3px); }
+    .form-meta {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--basalt-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .form-meta svg {
+      width: 13px; height: 13px;
+      stroke: var(--rosemary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* FAQ — much lighter touch */
+    .faq-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: var(--space-l) var(--space-m) var(--space-xl);
+    }
+    .faq-section .eyebrow { display: block; text-align: center; margin-bottom: var(--space-s); }
+    .faq-section > h2 {
+      text-align: center;
+      margin-bottom: var(--space-l);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    }
+    details.faq {
+      padding: var(--space-s) 0;
+      border-bottom: 1px solid rgba(61, 53, 48, 0.1);
+    }
+    details.faq:first-of-type { border-top: 1px solid rgba(61, 53, 48, 0.1); }
+    details.faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-m);
+      font-size: 1rem;
+      color: var(--basalt);
+      font-weight: 400;
+      padding: 0.5rem 0;
+      transition: color 0.3s;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary:hover { color: var(--rosemary); }
+    details.faq summary::after {
+      content: '+';
+      font-size: 1.4rem;
+      font-weight: 200;
+      color: var(--clay-dark);
+      transition: transform 0.3s var(--ease);
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    details.faq[open] summary { color: var(--rosemary); }
+    details.faq[open] summary::after { transform: rotate(45deg); color: var(--rosemary); }
+    details.faq .faq-body {
+      padding: 0.5rem 0 var(--space-s);
+      color: var(--basalt-soft);
+      line-height: 1.85;
+      max-width: 65ch;
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-contact-grid { grid-template-columns: 1fr; gap: var(--space-l); }
+      .channels-intro p { max-width: none; }
+    }
+    @media (max-width: 800px) {
+      .meet-grid { grid-template-columns: 1fr; gap: var(--space-l); }
+      .meet-map { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+      .letter-form { padding: var(--space-m); }
+      .channel-item { padding: var(--space-s); }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact" aria-current="page">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero — framed banner ===== -->
+    <section class="contact-hero" aria-labelledby="page-heading">
+      <div class="scene-noon" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="contact-hero-frame">
+        <span class="eyebrow">תמיד טוב לדבר</span>
+        <h1 id="page-heading">יצירת קשר</h1>
+        <div class="frame-divider" aria-hidden="true"></div>
+        <p>אנחנו עונים בעצמנו, לא דרך מוקד. בחרו את הדרך הנוחה לכם — נחזור אליכם תוך כמה שעות.</p>
+      </div>
+    </section>
+
+    <!-- ===== Main contact: channels + form, organized at top ===== -->
+    <section class="main-contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="sr-only">דרכי יצירת קשר וטופס פנייה</h2>
+
+      <div class="main-contact-grid">
+
+        <!-- Right column: Stacked channels -->
+        <div class="channels-stack">
+          <div class="channels-intro">
+            <span class="eyebrow">דרכי קשר</span>
+            <h2>הדרך הכי טובה — לדבר.</h2>
+            <p>אנחנו עונים בעצמנו, בלי תור ובלי לחיצות. בערב או בסופ״ש — עדיף ווטסאפ.</p>
+          </div>
+
+          <a href="tel:0523666489" class="channel-item featured" aria-label="התקשרו אלינו 052-3666489">
+            <span class="channel-icon-small" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <div class="channel-text">
+              <span class="channel-label-small">טלפון</span>
+              <span class="channel-value-small">052-3666489</span>
+              <span class="channel-note-small">תמיד עם בעלי המקום</span>
+            </div>
+            <svg class="channel-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+
+          <a href="https://wa.me/972523666489" target="_blank" rel="noopener noreferrer" class="channel-item" aria-label="שלח/י הודעה בווטסאפ">
+            <span class="channel-icon-small" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </span>
+            <div class="channel-text">
+              <span class="channel-label-small">ווטסאפ</span>
+              <span class="channel-value-small">שלח/י הודעה</span>
+              <span class="channel-note-small">תשובה מהירה במיוחד</span>
+            </div>
+            <svg class="channel-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+
+          <a href="mailto:eitanblayberg@gmail.com" class="channel-item" aria-label="שלח/י אימייל ל eitanblayberg@gmail.com">
+            <span class="channel-icon-small" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <div class="channel-text">
+              <span class="channel-label-small">אימייל</span>
+              <span class="channel-value-small">eitanblayberg@gmail.com</span>
+              <span class="channel-note-small">לפניות שאינן דחופות</span>
+            </div>
+            <svg class="channel-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+
+        <!-- Left column: Form card -->
+        <div class="letter-form">
+          <span class="form-eyebrow">או — בכתב</span>
+          <h3>השאירו לנו פתק</h3>
+          <p class="lead-line">השם, מספר הטלפון, ובכמה מילים — מה הייתם רוצים לדעת. נחזור אליכם.</p>
+
+          <form class="form-stack" onsubmit="event.preventDefault(); document.getElementById('form-success').hidden = false; this.hidden = true;" novalidate>
+
+            <div class="form-row">
+              <div class="field-block">
+                <label for="name"><span class="required">*</span>שם</label>
+                <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+              </div>
+              <div class="field-block">
+                <label for="phone"><span class="required">*</span>טלפון</label>
+                <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" placeholder="050-1234567">
+              </div>
+            </div>
+
+            <div class="field-block">
+              <label for="topic">נושא</label>
+              <select id="topic" name="topic">
+                <option value="הזמנה">הזמנת צימר</option>
+                <option value="טיפולים">טיפול בקליניקה</option>
+                <option value="האזור">שאלות על האזור</option>
+                <option value="אחר">אחר</option>
+              </select>
+            </div>
+
+            <div class="field-block">
+              <label for="message"><span class="required">*</span>ההודעה</label>
+              <textarea id="message" name="message" rows="4" required aria-required="true" placeholder="תאריכים, מספר אנשים, או כל פרט שיעזור לנו לחזור עם תשובה ממוקדת"></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary">
+                <span>שלח/י הודעה</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <p class="form-meta">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>הפרטים בטוחים ולא יועברו לאף גורם</span>
+              </p>
+            </div>
+          </form>
+
+          <div id="form-success" hidden role="status" aria-live="polite" style="text-align: center; padding: var(--space-l) var(--space-s);">
+            <h3 style="color: var(--rosemary); margin-bottom: var(--space-s); font-weight: 400;">תודה — קיבלנו</h3>
+            <p style="color: var(--basalt-soft);">נחזור אליכם בהקדם, בדרך כלל באותו יום.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <span class="eyebrow">שאלות שחוזרות</span>
+      <h2 id="faq-heading">אולי כבר יש לנו תשובה</h2>
+
+      <details class="faq">
+        <summary>תוך כמה זמן אתם חוזרים אליי?</summary>
+        <div class="faq-body">בשעות הפעילות — בדרך כלל בתוך פחות משעה. בערב או בסופ״ש לפעמים עד היום שלמחרת. בווטסאפ הכי מהר.</div>
+      </details>
+
+      <details class="faq">
+        <summary>אפשר להזמין רק טיפול בלי לישון אצלכם?</summary>
+        <div class="faq-body">בהחלט. הקליניקה פתוחה גם לאורחים מבחוץ — צריך רק לתאם זמן מראש. רוב הטיפולים מתקיימים בין 10:00 ל-19:00.</div>
+      </details>
+
+      <details class="faq">
+        <summary>מה מדיניות הביטולים?</summary>
+        <div class="faq-body">ביטול עד 14 יום לפני הכניסה — החזר מלא. בין 14 ל-7 ימים — 50%. פחות מ-7 ימים — חיוב מלא, אלא אם נצליח להשכיר מחדש את התאריך.</div>
+      </details>
+
+      <details class="faq">
+        <summary>יש מקום עם חיות מחמד?</summary>
+        <div class="faq-body">כלבים מאולפים מתקבלים בברכה, בתיאום מראש ובתוספת תשלום סמלי. נשמח שתספרו לנו עליהם בעת ההזמנה.</div>
+      </details>
+
+      <details class="faq">
+        <summary>איך מגיעים בלי רכב?</summary>
+        <div class="faq-body">קווי אגד 392 ו-444 עוצרים בעין יהב. נשמח לאסוף אתכם מהתחנה אם תתאמו מראש — חמש דקות נסיעה.</div>
+      </details>
+
+      <details class="faq">
+        <summary>האזור נגיש לאנשים עם מוגבלויות?</summary>
+        <div class="faq-body">צימר אחד מותאם — דלתות רחבות, מקלחת ללא מדרגה, וגישה ישירה מהחניה. נא לציין בעת ההזמנה.</div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+        </a>
+        <p>ארבעה צימרים וקליניקת ספא בעין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a><br><a href="mailto:eitanblayberg@gmail.com">eitanblayberg@gmail.com</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

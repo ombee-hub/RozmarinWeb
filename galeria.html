@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>גלריה · רוזמרין</title>
+  <meta name="description" content="גלריית תמונות של מתחם רוזמרין — צימרים, ספא, ונופי הערבה." />
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ===== Galeria — framed scenic hero ===== */
+    .galeria-hero {
+      position: relative;
+      min-height: 420px;
+      height: 55vh;
+      max-height: 540px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-l);
+    }
+    .galeria-hero .scene-noon { position: absolute; inset: 0; z-index: 0; }
+    .galeria-hero .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(26, 31, 42, 0.25) 0%, rgba(26, 31, 42, 0.55) 100%);
+      z-index: 1;
+    }
+    .galeria-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-l) clamp(2rem, 8vw, 4.5rem);
+      max-width: 720px;
+      width: calc(100% - 2 * var(--space-m));
+      text-align: center;
+    }
+    .galeria-hero .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 0 auto var(--space-l);
+    }
+    .galeria-hero .ornament-line { width: 60px; height: 1px; background: rgba(244, 232, 200, 0.6); }
+    .galeria-hero .ornament-dot {
+      width: 6px; height: 6px;
+      border: 1px solid rgba(244, 232, 200, 0.7);
+      transform: rotate(45deg);
+    }
+    .galeria-hero .eyebrow {
+      display: block;
+      color: rgba(244, 232, 200, 0.85);
+      margin-bottom: var(--space-m);
+      font-size: 0.85rem;
+      letter-spacing: 0.4em;
+    }
+    .galeria-hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 200;
+      color: var(--sand-light);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-m);
+      line-height: 1;
+    }
+    .galeria-hero p {
+      color: rgba(244, 232, 200, 0.9);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      max-width: 44ch;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ===== Tabs ===== */
+    .gallery-tabs {
+      display: flex;
+      gap: var(--space-l);
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 var(--space-m) var(--space-l);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .gallery-tabs button {
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      padding: 0.7rem 0.5rem;
+      border-bottom: 2px solid transparent;
+      color: var(--basalt-soft);
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+      background: transparent;
+      border-top: 0; border-left: 0; border-right: 0;
+      font-weight: 500;
+    }
+    .gallery-tabs button.active,
+    .gallery-tabs button:hover {
+      color: var(--basalt);
+      border-bottom-color: var(--rosemary);
+    }
+    .gallery-tabs button .count {
+      color: var(--clay-dark);
+      font-size: 0.78rem;
+      margin-right: 0.3rem;
+      font-weight: 400;
+    }
+
+    /* ===== Gallery grid (asymmetric) ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 8px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-m) var(--space-xl);
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--sand-deep);
+      border-radius: 2px;
+      transition: transform 0.4s var(--ease);
+    }
+    .gallery-item:hover { transform: translateY(-3px); }
+
+    /* Spans for varied layout */
+    .gallery-item.tall  { grid-row: span 2; }
+    .gallery-item.wide  { grid-column: span 2; }
+    .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+
+    /* Scene fill takes the place of real photos for now */
+    .gallery-item .scene {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s var(--ease), filter 0.4s var(--ease);
+    }
+    .gallery-item:hover .scene { transform: scale(1.06); filter: brightness(1.05); }
+
+    /* Soft hover overlay with caption */
+    .gallery-item .caption {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 31, 42, 0.78) 0%, rgba(26, 31, 42, 0.1) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-m);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease);
+    }
+    .gallery-item:hover .caption,
+    .gallery-item:focus-within .caption { opacity: 1; }
+    .gallery-item .caption-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(244, 232, 200, 0.75);
+      margin-bottom: 0.3rem;
+    }
+    .gallery-item .caption-title {
+      color: var(--sand-light);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* Decorative element to suggest photo content */
+    .gallery-item .photo-mark {
+      position: absolute;
+      top: var(--space-s);
+      right: var(--space-s);
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(244, 232, 200, 0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      background: rgba(26, 31, 42, 0.18);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease);
+    }
+    .gallery-item:hover .photo-mark { opacity: 1; }
+    .gallery-item .photo-mark svg { width: 14px; height: 14px; stroke: var(--sand-light); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Stats strip */
+    .gallery-stats {
+      background: var(--sand-light);
+      padding: var(--space-l) var(--space-m);
+      border-top: 1px solid rgba(61, 53, 48, 0.08);
+      border-bottom: 1px solid rgba(61, 53, 48, 0.08);
+      margin-bottom: var(--space-l);
+    }
+    .gallery-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      gap: var(--space-m);
+    }
+    .gallery-stats-item {
+      padding: 0 var(--space-s);
+    }
+    .gallery-stats-item:not(:last-child) { border-left: 1px solid rgba(61, 53, 48, 0.12); }
+    .gallery-stats-num {
+      font-weight: 200;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--clay-dark);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .gallery-stats-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--basalt-soft);
+    }
+
+    @media (max-width: 800px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+      .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+      .gallery-item.wide { grid-column: span 2; }
+      .gallery-stats-grid { grid-template-columns: 1fr; gap: var(--space-l); }
+      .gallery-stats-item:not(:last-child) { border-left: none; border-bottom: 1px solid rgba(61, 53, 48, 0.12); padding-bottom: var(--space-m); }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html" aria-current="page">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="galeria-hero" aria-labelledby="page-heading">
+      <div class="scene-noon" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="galeria-hero-content">
+        <div class="ornament" aria-hidden="true">
+          <span class="ornament-line"></span>
+          <span class="ornament-dot"></span>
+          <span class="ornament-line"></span>
+        </div>
+        <span class="eyebrow">תמונות מהמקום</span>
+        <h1 id="page-heading">גלריה</h1>
+        <p>מה שתראו כאן הוא בערך מה שתראו במציאות. את השקט אי&#8209;אפשר לצלם.</p>
+      </div>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section class="gallery-stats" aria-label="סטטיסטיקות גלריה">
+      <div class="gallery-stats-grid">
+        <div class="gallery-stats-item">
+          <div class="gallery-stats-num">120+</div>
+          <div class="gallery-stats-label">תמונות במתחם</div>
+        </div>
+        <div class="gallery-stats-item">
+          <div class="gallery-stats-num">4</div>
+          <div class="gallery-stats-label">צימרים שונים</div>
+        </div>
+        <div class="gallery-stats-item">
+          <div class="gallery-stats-num">3</div>
+          <div class="gallery-stats-label">קטגוריות</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tabs ===== -->
+    <div class="gallery-tabs" role="group" aria-label="סינון לפי קטגוריה">
+      <button class="active" type="button" aria-pressed="true">הכל <span class="count">12</span></button>
+      <button type="button" aria-pressed="false">צימרים <span class="count">5</span></button>
+      <button type="button" aria-pressed="false">ספא <span class="count">3</span></button>
+      <button type="button" aria-pressed="false">נוף <span class="count">4</span></button>
+    </div>
+
+    <!-- ===== Gallery grid ===== -->
+    <section class="gallery-grid" aria-label="תמונות מהמתחם">
+
+      <article class="gallery-item large">
+        <div class="scene scene-morning"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">צימרים</span>
+          <span class="caption-title">דק עץ עם נוף בוקר</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-evening"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">ספא</span>
+          <span class="caption-title">קליניקת טיפולים</span>
+        </div>
+      </article>
+
+      <article class="gallery-item tall">
+        <div class="scene scene-night"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">נוף</span>
+          <span class="caption-title">שמיים זרועי כוכבים</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-noon"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">נוף</span>
+          <span class="caption-title">ערבה בצהריים</span>
+        </div>
+      </article>
+
+      <article class="gallery-item wide">
+        <div class="scene scene-morning"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">צימרים</span>
+          <span class="caption-title">חדר שינה עם ג׳קוזי</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-evening"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">ספא</span>
+          <span class="caption-title">אבני בזלת חמות</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-noon"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">נוף</span>
+          <span class="caption-title">מסלול לבריכה</span>
+        </div>
+      </article>
+
+      <article class="gallery-item tall">
+        <div class="scene scene-morning"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">צימרים</span>
+          <span class="caption-title">גלריית שינה</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-evening"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">ספא</span>
+          <span class="caption-title">שמן חם ונרות</span>
+        </div>
+      </article>
+
+      <article class="gallery-item wide">
+        <div class="scene scene-night"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">נוף</span>
+          <span class="caption-title">לילה בערבה</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-morning"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">צימרים</span>
+          <span class="caption-title">מטבח מאובזר</span>
+        </div>
+      </article>
+
+      <article class="gallery-item">
+        <div class="scene scene-noon"></div>
+        <div class="photo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M21 8V5h-3M3 8V5h3M21 16v3h-3M3 16v3h3"/></svg>
+        </div>
+        <div class="caption">
+          <span class="caption-eyebrow">צימרים</span>
+          <span class="caption-title">מדשאה ונדנדות</span>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ===== Testimonial ===== -->
+    <section class="testimonial">
+      <span class="quote-mark">״</span>
+      <blockquote>
+        התמונות באתר נחמדות, אבל לא מצליחות לתפוס את השקט. אי אפשר לצלם אותו.
+      </blockquote>
+      <cite>— ענת, תל אביב</cite>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-strip">
+      <p class="eyebrow" style="color: var(--clay);">בואו לראות במו עיניכם</p>
+      <h2>שיגיע גם הריח, גם השקט, גם הכוכבים</h2>
+      <div class="cta-buttons">
+        <a href="hazmana.html" class="btn btn-primary">לעמוד ההזמנה</a>
+        <a href="tel:0523666489" class="btn">חייגו · 052-3666489</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+        </a>
+        <p>ארבעה צימרים וקליניקת ספא במושב עין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a><br><a href="mailto:eitanblayberg@gmail.com">eitanblayberg@gmail.com</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

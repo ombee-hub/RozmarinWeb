@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>פינוקים · רוזמרין</title>
+  <meta name="description" content="כל הפינוקים והשירותים הכלולים בשהותכם במתחם רוזמרין — מטבח מאובזר, ספא, בריכה, גן, ועוד." />
+
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .pinukim-intro {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-m) var(--space-m);
+      text-align: center;
+    }
+    .pinukim-intro p {
+      font-size: var(--type-lead);
+      color: var(--basalt-soft);
+      max-width: 50ch;
+      margin: var(--space-s) auto 0;
+    }
+
+    /* Categories — sections with title + grid of perks */
+    .pinukim-category {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--space-l) var(--space-m);
+    }
+    .pinukim-category + .pinukim-category {
+      border-top: 1px solid rgba(61, 53, 48, 0.08);
+    }
+    .pinukim-category-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-m);
+      align-items: center;
+      margin-bottom: var(--space-l);
+      max-width: 720px;
+    }
+    .pinukim-category-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--sand-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pinukim-category-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--rosemary);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .pinukim-category-title h2 {
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.3rem;
+    }
+    .pinukim-category-title .eyebrow {
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .pinukim-category-title p {
+      color: var(--basalt-soft);
+      max-width: 45ch;
+      line-height: 1.7;
+      margin-top: 0.3rem;
+    }
+
+    .pinukim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-s);
+    }
+    .pinukim-item {
+      display: flex;
+      gap: var(--space-s);
+      align-items: flex-start;
+      padding: var(--space-m);
+      background: var(--sand-light);
+      border: 1px solid rgba(61, 53, 48, 0.06);
+      transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .pinukim-item:hover {
+      border-color: var(--rosemary);
+      transform: translateY(-2px);
+    }
+    .pinukim-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sand-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pinukim-item-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--clay-dark);
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .pinukim-item-text h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: var(--basalt);
+    }
+    .pinukim-item-text p {
+      font-size: 0.9rem;
+      color: var(--basalt-soft);
+      line-height: 1.65;
+    }
+
+    .pinukim-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: var(--space-m);
+      color: var(--rosemary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: gap 0.3s var(--ease);
+    }
+    .pinukim-link:hover { gap: 0.7rem; color: var(--clay-dark); }
+    .pinukim-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Highlights strip */
+    .pinukim-quote {
+      background: var(--basalt);
+      color: var(--sand-light);
+      text-align: center;
+      padding: var(--space-xl) var(--space-m);
+    }
+    .pinukim-quote .eyebrow { color: var(--clay); margin-bottom: var(--space-s); display: inline-block; }
+    .pinukim-quote h2 {
+      color: var(--sand-light);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .pinukim-category-header { grid-template-columns: 1fr; text-align: right; }
+      .pinukim-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html" aria-current="page">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="framed-hero" aria-labelledby="page-heading">
+      <div class="scene-morning" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="framed-hero-content">
+        <div class="ornament" aria-hidden="true">
+          <span class="ornament-line"></span>
+          <span class="ornament-dot"></span>
+          <span class="ornament-line"></span>
+        </div>
+        <span class="eyebrow">מה כלול בשהותכם</span>
+        <h1 id="page-heading">פינוקים</h1>
+        <p>מטבח מאובזר, גן רחב ידיים, בריכה גדולה, וגישה לקליניקת הספא — הכל כלול.</p>
+      </div>
+    </section>
+
+    <section class="pinukim-intro">
+      <span class="eyebrow">הכל כלול</span>
+      <p>בכל שהות במתחם — מטבח מאובזר, גן רחב ידיים, בריכה גדולה, וגישה לקליניקת הספא. בלי תוספות, בלי הפתעות.</p>
+    </section>
+
+    <!-- ===== Category 1: In the cottage ===== -->
+    <section class="pinukim-category" aria-labelledby="cat-cottage">
+      <div class="pinukim-category-header">
+        <div class="pinukim-category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <div class="pinukim-category-title">
+          <span class="eyebrow">בתוך הצימר</span>
+          <h2 id="cat-cottage">הבית שלכם</h2>
+          <p>כל מה שצריך כדי להרגיש בבית — בלי לארוז יותר מדי.</p>
+        </div>
+      </div>
+
+      <div class="pinukim-grid">
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM3 11h18M8 7V4h8v3"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>מטבח מאובזר במלואו</h3>
+            <p>שולחן אוכל, מקרר, מיקרוגל, מכונת קפה וכלי מטבח לשימושכם.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M9 11l-1-3M15 11l1-3M12 14v.01"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>ג׳קוזי בחדר השינה</h3>
+            <p>ג׳קוזי גדול בלב הצימר — להירגעות זוגית ולכיף משפחתי.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12.5a14 14 0 0 1 14 0M8.5 16a8 8 0 0 1 7 0M12 19.5h.01"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>אינטרנט מהיר Wi-Fi</h3>
+            <p>חיבור יציב ומהיר בכל הצימר — לעבודה, סטרימינג, או שיחות וידאו.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M8 21h8M12 19v2"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>טלוויזיה עם כבלים</h3>
+            <p>מסך עם חיבור כבלים מלא, לערב נינוח על הספה.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 7h18v6H3z"/><path d="M3 13l2 8h14l2-8"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>גלריה למיטות נוספות</h3>
+            <p>קומת גלריה מעל חדר השינה — מקום לילדים או לחברים.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/><circle cx="20" cy="18" r="2"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>מצעי כותנה ומגבות</h3>
+            <p>סדינים נקיים, מגבות גוף ופנים — מוכנים לכניסתכם.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Category 2: Outdoors ===== -->
+    <section class="pinukim-category" aria-labelledby="cat-outdoor">
+      <div class="pinukim-category-header">
+        <div class="pinukim-category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 22V12M5 12c0-3.87 3.13-7 7-7s7 3.13 7 7M3 22h18"/></svg>
+        </div>
+        <div class="pinukim-category-title">
+          <span class="eyebrow">מחוץ לצימר</span>
+          <h2 id="cat-outdoor">גן, דק ומים</h2>
+          <p>שטח פתוח להרבה זמן בחוץ — שקט, מוצל, ועם תפאורת ערבה.</p>
+        </div>
+      </div>
+
+      <div class="pinukim-grid">
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6"/><path d="M3 9V5M21 9V5M3 19v-4M21 19v-4"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>דק עץ פרטי</h3>
+            <p>מרפסת מעץ צמודה לכל צימר — לקפה של הבוקר ולכוכבים בלילה.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2v6M9 4l3-2 3 2M3 22h18M5 22V12h14v10"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>מדשאה רחבה ידיים</h3>
+            <p>שטח דשא משותף לכל האורחים — לפיקניק, לכדור, או רק לשבת.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 5h18M5 5v3a4 4 0 0 0 8 0M19 5v3a4 4 0 0 1-4 4M9 22h6"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>נדנדות לילדים</h3>
+            <p>נדנדות וגינה לתפארת — כדי שגם הקטנים יחזרו מרוצים.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2 12c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M2 18c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M2 6c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>בריכה ענקית מוצלת</h3>
+            <p>5 דקות הליכה. בריכת המושב פתוחה לאורחי המתחם.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Category 3: Spa & treatments ===== -->
+    <section class="pinukim-category" aria-labelledby="cat-spa">
+      <div class="pinukim-category-header">
+        <div class="pinukim-category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2c2 4 6 6 6 11a6 6 0 0 1-12 0c0-5 4-7 6-11z"/></svg>
+        </div>
+        <div class="pinukim-category-title">
+          <span class="eyebrow">קליניקת הספא</span>
+          <h2 id="cat-spa">פינוק לגוף</h2>
+          <p>קליניקה מקצועית בתוך המתחם, עם מגוון טיפולי מגע ושמן חם.</p>
+        </div>
+      </div>
+
+      <div class="pinukim-grid">
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2v20M5 9h14M5 15h14"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>עיסויים מקצועיים</h3>
+            <p>שוודי, רקמות עמוק, משולב, רפלקסולוגיה ועיסוי הריון.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>אבני בזלת חמות</h3>
+            <p>אבנים מקומיות מחוממות — חום עמוק שלא משיגים מידיים בלבד.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v6M9 9h6M10 9v8a2 2 0 0 0 4 0V9"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>נרות הופי לאוזניים</h3>
+            <p>טיפול עתיק להקלה על לחצים באוזניים ובסינוסים.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 8c-3 0-3 4 0 4s3 4 0 4M12 5v3M12 16v3"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>תיאום גמיש לפי תאריכים</h3>
+            <p>אפשר להוסיף טיפול לכל הזמנת צימר — או להגיע רק לטיפול.</p>
+          </div>
+        </article>
+      </div>
+
+      <a href="spa.html" class="pinukim-link">
+        <span>לתפריט הטיפולים המלא ולמחירים</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== Quote strip ===== -->
+    <section class="pinukim-quote">
+      <span class="eyebrow">מההבטחה שלנו</span>
+      <h2>שיגיעו עם תיק קטן ויחזרו מרוצים. כל מה שצריך — כבר כאן.</h2>
+    </section>
+
+    <!-- ===== Category 4: Around the complex ===== -->
+    <section class="pinukim-category" aria-labelledby="cat-area">
+      <div class="pinukim-category-header">
+        <div class="pinukim-category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="pinukim-category-title">
+          <span class="eyebrow">סביב המתחם</span>
+          <h2 id="cat-area">מה לעשות באזור</h2>
+          <p>מושב עין יהב והערבה התיכונה מציעים יותר משחושבים.</p>
+        </div>
+      </div>
+
+      <div class="pinukim-grid">
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M3 12h18M3 12v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8M9 8h6"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>מסעדות מקומיות</h3>
+            <p>״פונדק 90״, ״הבית של בנג׳י״ ועוד — נמליץ לפי טעם.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 18l5-5 4 4 6-7 3 3"/><path d="M3 21h18"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>טיולי מדבר</h3>
+            <p>נחל ברק, הר עמיר, מצפה שלמה — מסלולים לכל רמה.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>שמיים זרועי כוכבים</h3>
+            <p>אחד האזורים החשוכים בארץ — שביל החלב נראה בעין.</p>
+          </div>
+        </article>
+
+        <article class="pinukim-item">
+          <span class="pinukim-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2 8l10-5 10 5-10 5z"/><path d="M2 16l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </span>
+          <div class="pinukim-item-text">
+            <h3>סכר ציחור</h3>
+            <p>15 דקות נסיעה. פינת פיקניק שקטה מעל מאגר מים.</p>
+          </div>
+        </article>
+      </div>
+
+      <a href="hamakom.html" class="pinukim-link">
+        <span>למידע מלא על האזור</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-strip">
+      <p class="eyebrow" style="color: var(--clay);">מוכנים לנוח?</p>
+      <h2>בואו לשמור תאריך</h2>
+      <p>שיחה אחת, לא טופס. ספרו לנו על התאריכים, ואם מעניין אתכם גם טיפול — נוכל לתאם הכל יחד.</p>
+      <div class="cta-buttons">
+        <a href="tel:0523666489" class="btn btn-primary">חייגו · 052-3666489</a>
+        <a href="hazmana.html" class="btn">לעמוד ההזמנה</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+        </a>
+        <p>ארבעה צימרים וקליניקת ספא במושב עין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a><br><a href="mailto:eitanblayberg@gmail.com">eitanblayberg@gmail.com</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ממליצים · רוזמרין</title>
+  <meta name="description" content="עדויות מאורחים שביקרו במתחם רוזמרין בעין יהב — זוגות, משפחות, ומטיילי ספא." />
+
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Testimonials-page specific */
+
+    /* Filter chips */
+    .filters {
+      display: flex;
+      gap: var(--space-s);
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 var(--space-m) var(--space-l);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .filter-chip {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(61, 53, 48, 0.2);
+      background: transparent;
+      color: var(--basalt-soft);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      border-radius: 999px;
+    }
+    .filter-chip:hover {
+      border-color: var(--rosemary);
+      color: var(--rosemary);
+    }
+    .filter-chip[aria-pressed="true"] {
+      background: var(--basalt);
+      border-color: var(--basalt);
+      color: var(--sand-light);
+    }
+
+    /* Reviews grid */
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-m);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-m) var(--space-xl);
+    }
+    .review {
+      background: var(--sand-light);
+      border: 1px solid rgba(61, 53, 48, 0.1);
+      padding: var(--space-l);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-s);
+      transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+    .review:hover {
+      transform: translateY(-3px);
+      border-color: var(--rosemary);
+    }
+
+    /* Featured larger review spans 2 cols */
+    .review.featured {
+      grid-column: span 2;
+      background: var(--basalt);
+      color: var(--sand-light);
+      border-color: var(--basalt);
+      padding: var(--space-xl) var(--space-l);
+      align-items: center;
+      text-align: center;
+    }
+    .review.featured blockquote { color: var(--sand-light); font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+    .review.featured .review-meta-name { color: var(--sand-light); }
+    .review.featured .review-meta-extra { color: rgba(244, 232, 200, 0.6); }
+    .review.featured .review-stars { color: var(--clay); }
+
+    .review-stars {
+      display: flex;
+      gap: 0.2rem;
+      color: var(--clay-dark);
+    }
+    .review-stars svg {
+      width: 16px; height: 16px;
+      fill: currentColor;
+    }
+    .review blockquote {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--basalt);
+      font-weight: 300;
+      letter-spacing: 0;
+    }
+    .review-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(184, 137, 106, 0.3);
+      align-self: flex-start;
+      border-radius: 999px;
+    }
+    .review.featured .review-tag {
+      color: var(--clay);
+      border-color: rgba(184, 137, 106, 0.5);
+    }
+    .review-meta {
+      margin-top: auto;
+      padding-top: var(--space-s);
+      border-top: 1px solid rgba(61, 53, 48, 0.12);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .review.featured .review-meta {
+      border-color: rgba(244, 232, 200, 0.2);
+      justify-content: center;
+    }
+    .review-meta-name {
+      font-weight: 500;
+      color: var(--basalt);
+    }
+    .review-meta-extra {
+      color: var(--basalt-soft);
+      font-size: 0.85rem;
+    }
+
+    /* Stats strip */
+    .stats {
+      background: var(--sand-light);
+      padding: var(--space-l) var(--space-m);
+      border-top: 1px solid rgba(61, 53, 48, 0.1);
+      border-bottom: 1px solid rgba(61, 53, 48, 0.1);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-m);
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Assistant', sans-serif;
+      font-weight: 200;
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      color: var(--clay-dark);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--basalt-soft);
+    }
+
+    @media (max-width: 800px) {
+      .reviews { grid-template-columns: 1fr; }
+      .review.featured { grid-column: span 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-l); }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html" aria-current="page">ממליצים</a>
+        <a href="hazmana.html">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="framed-hero" aria-labelledby="page-heading">
+      <div class="scene-evening" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="framed-hero-content">
+        <div class="ornament" aria-hidden="true">
+          <span class="ornament-line"></span>
+          <span class="ornament-dot"></span>
+          <span class="ornament-line"></span>
+        </div>
+        <span class="eyebrow">מה אומרים עלינו</span>
+        <h1 id="page-heading">ממליצים</h1>
+        <p>הדברים האלה כתבו לנו האורחים שלנו. לא ביקשנו, פשוט כתבו.</p>
+      </div>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section class="stats" aria-label="נתוני אורחים">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-num">4.9</div>
+          <div class="stat-label">דירוג ממוצע</div>
+        </div>
+        <div>
+          <div class="stat-num">94%</div>
+          <div class="stat-label">חוזרים שוב</div>
+        </div>
+        <div>
+          <div class="stat-num">2,400+</div>
+          <div class="stat-label">לילות אירוח</div>
+        </div>
+        <div>
+          <div class="stat-num">8</div>
+          <div class="stat-label">שנות פעילות</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Filters ===== -->
+    <div class="filters" role="group" aria-label="סינון לפי קטגוריה">
+      <button class="filter-chip" aria-pressed="true">הכל</button>
+      <button class="filter-chip" aria-pressed="false">זוגות</button>
+      <button class="filter-chip" aria-pressed="false">משפחות</button>
+      <button class="filter-chip" aria-pressed="false">ספא</button>
+      <button class="filter-chip" aria-pressed="false">חברים</button>
+    </div>
+
+    <!-- ===== Reviews ===== -->
+    <section class="reviews" aria-labelledby="reviews-heading">
+      <h2 id="reviews-heading" class="sr-only">עדויות אורחים</h2>
+
+      <article class="review featured">
+        <span class="review-tag">זוגות</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>הגענו עייפים. ביום השני כבר לא ידענו מה השעה. ביום השלישי לא רצינו לחזור. זה לא צימר — זו הפסקה אמיתית.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">דנה ויוסי</span>
+          <span class="review-meta-extra">חיפה · יום נישואין · מאי 2024</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">ספא</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>בפעם הראשונה הזמנתי טיפול אחד. בפעם השנייה הגעתי בשביל הטיפולים, והצימר היה בונוס. שירה היא קוסמת.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">מירב ל.</span>
+          <span class="review-meta-extra">באר שבע · ינואר 2024</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">חברים</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>ענו לי בווטסאפ תוך עשר דקות, גם בשבת בערב. נדיר. לא אדם אחד שאני מכירה לא יצא מרוצה אחרי ביקור אצלם.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">רן מ.</span>
+          <span class="review-meta-extra">מודיעין · מרץ 2024</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">משפחות</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>הגענו עם שני ילדים בני 8 ו-11. דאגנו שיהיה משעמם. בסוף הם רצו להישאר עוד יום. הבריכה, הדק, הכוכבים — הכל היה הרפתקה בשבילם.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">משפחת אלון</span>
+          <span class="review-meta-extra">רמת גן · אוגוסט 2023</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">זוגות</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>אנחנו חוזרים פעמיים בשנה. בכל פעם כרמית זוכרת מה שתינו בקפה האחרון. זו לא תפעול, זה משהו אחר.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">יעל וגיא</span>
+          <span class="review-meta-extra">תל אביב · לקוחות חוזרים</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">ספא</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>טיפול אבני בזלת היה אחד הטיפולים הכי איכותיים שעברתי. אורי לא ממהר, מסביר, ומקשיב לגוף. נסעתי שעתיים בשבילו וזה היה שווה.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">שרון ב.</span>
+          <span class="review-meta-extra">נשר · פברואר 2024</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">זוגות</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>הצימר עצמו פשוט יפהפה — עץ אמיתי, ג׳קוזי גדול, ומיטה שאי אפשר לקום ממנה. אבל מה שעשה את ההבדל זה השמיים בלילה. לא ראיתי כל כך הרבה כוכבים מאז שהייתי ילדה.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">ענת ר.</span>
+          <span class="review-meta-extra">תל אביב · נובמבר 2023</span>
+        </div>
+      </article>
+
+      <article class="review">
+        <span class="review-tag">משפחות</span>
+        <div class="review-stars" aria-label="5 מתוך 5 כוכבים">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <blockquote>הזמנו את כל ארבעת הצימרים לסוף שבוע משפחתי של 14 איש. כרמית דאגה לכל פרט, מהמטבח ועד לקפה של הבוקר. נחזור בעוד שנה.</blockquote>
+        <div class="review-meta">
+          <span class="review-meta-name">משפחת כהן</span>
+          <span class="review-meta-extra">פתח תקווה · ספטמבר 2024</span>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-strip">
+      <p class="eyebrow" style="color: var(--clay);">בואו לכתוב את הבא</p>
+      <h2>השאירו לנו תאריך</h2>
+      <p>שיחה אחת, לא טופס. ספרו לנו על התאריכים, ואם זה הביקור הראשון — נמצא לכם את הצימר הנכון.</p>
+      <div class="cta-buttons">
+        <a href="tel:0523666489" class="btn btn-primary">חייגו · 052-3666489</a>
+        <a href="hazmana.html" class="btn">לעמוד ההזמנה</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+        </a>
+        <p>ארבעה צימרים וקליניקת ספא בעין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a><br><a href="mailto:eitanblayberg@gmail.com">eitanblayberg@gmail.com</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

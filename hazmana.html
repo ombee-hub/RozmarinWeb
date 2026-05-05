@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>הזמנה · רוזמרין</title>
+  <meta name="description" content="הזמנת צימר במתחם רוזמרין בעין יהב. שיחה אחת ולא טופס — אנחנו עונים בעצמנו." />
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ===== Hazmana hero — framed scenic ===== */
+    .hazmana-hero {
+      position: relative;
+      min-height: 420px;
+      height: 55vh;
+      max-height: 540px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-l);
+    }
+    .hazmana-hero .scene-night { position: absolute; inset: 0; z-index: 0; }
+    .hazmana-hero .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(26, 31, 42, 0.3) 0%, rgba(26, 31, 42, 0.6) 100%);
+      z-index: 1;
+    }
+    .hazmana-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: var(--space-l) clamp(2rem, 8vw, 4.5rem);
+      max-width: 720px;
+      width: calc(100% - 2 * var(--space-m));
+      text-align: center;
+    }
+    .hazmana-hero .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 0 auto var(--space-l);
+    }
+    .hazmana-hero .ornament-line { width: 60px; height: 1px; background: rgba(244, 232, 200, 0.6); }
+    .hazmana-hero .ornament-dot {
+      width: 6px; height: 6px;
+      border: 1px solid rgba(244, 232, 200, 0.7);
+      transform: rotate(45deg);
+    }
+    .hazmana-hero .eyebrow {
+      display: block;
+      color: rgba(244, 232, 200, 0.85);
+      margin-bottom: var(--space-m);
+      font-size: 0.85rem;
+      letter-spacing: 0.4em;
+    }
+    .hazmana-hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 200;
+      color: var(--sand-light);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-m);
+      line-height: 1;
+    }
+    .hazmana-hero p {
+      color: rgba(244, 232, 200, 0.9);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      max-width: 44ch;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ===== Trust strip — three reasons ===== */
+    .trust-strip {
+      max-width: var(--max-w);
+      margin: 0 auto var(--space-l);
+      padding: var(--space-l) var(--space-m);
+      border-bottom: 1px solid rgba(61, 53, 48, 0.08);
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-m);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .trust-item {
+      text-align: center;
+      padding: var(--space-s);
+    }
+    .trust-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--sand-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-s);
+    }
+    .trust-icon svg {
+      width: 24px; height: 24px;
+      stroke: var(--rosemary);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .trust-item h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: var(--basalt);
+    }
+    .trust-item p {
+      font-size: 0.92rem;
+      color: var(--basalt-soft);
+      line-height: 1.6;
+      max-width: 28ch;
+      margin: 0 auto;
+    }
+
+    /* ===== Booking layout ===== */
+    .booking-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-m) var(--space-xl);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* RIGHT — phone CTA card */
+    .phone-side {
+      padding: var(--space-l) 0;
+    }
+    .phone-side .eyebrow { display: block; margin-bottom: var(--space-s); }
+    .phone-side h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 200;
+      line-height: 1.25;
+      margin-bottom: var(--space-m);
+    }
+    .phone-side p {
+      color: var(--basalt-soft);
+      line-height: 1.85;
+      max-width: 36ch;
+      margin-bottom: var(--space-m);
+    }
+    .phone-card {
+      background: linear-gradient(135deg, var(--rosemary) 0%, #5C6B4D 100%);
+      color: var(--sand-light);
+      padding: var(--space-l);
+      margin-top: var(--space-l);
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-card::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: -20%;
+      width: 60%; height: 180%;
+      background: radial-gradient(ellipse, rgba(244, 232, 200, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .phone-card .phone-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(244, 232, 200, 0.75);
+      display: block;
+      margin-bottom: var(--space-s);
+    }
+    .phone-card a.phone-num {
+      display: block;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 200;
+      color: var(--sand-light);
+      letter-spacing: 0.02em;
+      margin-bottom: var(--space-s);
+      transition: opacity 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    .phone-card a.phone-num:hover { opacity: 0.85; }
+    .phone-card .phone-meta {
+      font-size: 0.95rem;
+      color: rgba(244, 232, 200, 0.8);
+      position: relative;
+      z-index: 1;
+      margin-bottom: var(--space-m);
+    }
+    .phone-buttons {
+      display: flex;
+      gap: var(--space-s);
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .phone-buttons .btn {
+      background: rgba(244, 232, 200, 0.15);
+      border-color: rgba(244, 232, 200, 0.4);
+      color: var(--sand-light);
+    }
+    .phone-buttons .btn:hover {
+      background: var(--sand-light);
+      color: var(--rosemary);
+      border-color: var(--sand-light);
+    }
+
+    /* LEFT — booking form card */
+    .form-card {
+      background: var(--sand-light);
+      border: 1px solid rgba(61, 53, 48, 0.08);
+      padding: var(--space-l);
+    }
+    .form-card .eyebrow { display: block; margin-bottom: var(--space-s); }
+    .form-card h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .form-card > p.lead-line {
+      color: var(--basalt-soft);
+      margin-bottom: var(--space-l);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .form-stack { display: flex; flex-direction: column; gap: var(--space-m); }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-m);
+    }
+    .field-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .field-block label {
+      font-size: 0.9rem;
+      color: var(--basalt-soft);
+      font-weight: 400;
+    }
+    .field-block label .required {
+      color: var(--clay-dark);
+      margin-right: 0.2rem;
+    }
+    .field-block input,
+    .field-block textarea,
+    .field-block select {
+      padding: 0.85rem 0.5rem;
+      background: var(--sand);
+      border: 1px solid rgba(61, 53, 48, 0.15);
+      font: inherit;
+      color: var(--basalt);
+      direction: rtl;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    .field-block textarea { resize: vertical; min-height: 100px; }
+    .field-block input:focus,
+    .field-block textarea:focus,
+    .field-block select:focus {
+      outline: none;
+      border-color: var(--rosemary);
+      background: #FFFAF0;
+      box-shadow: 0 0 0 3px rgba(107, 122, 90, 0.12);
+    }
+
+    .form-submit {
+      margin-top: var(--space-m);
+      padding-top: var(--space-m);
+      border-top: 1px solid rgba(61, 53, 48, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+    }
+    .form-submit button {
+      width: 100%;
+      min-height: 56px;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+    .form-submit button svg {
+      width: 18px; height: 18px;
+      transition: transform 0.3s var(--ease);
+    }
+    .form-submit button:hover svg { transform: translateX(-3px); }
+    .form-meta {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--basalt-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .form-meta svg {
+      width: 13px; height: 13px;
+      stroke: var(--rosemary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .booking-wrap { grid-template-columns: 1fr; gap: var(--space-l); }
+      .phone-side p { max-width: none; }
+    }
+    @media (max-width: 700px) {
+      .trust-grid { grid-template-columns: 1fr; gap: var(--space-l); }
+      .field-row { grid-template-columns: 1fr; }
+      .form-card { padding: var(--space-m); }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="פתיחת תפריט">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <a href="index.html" class="logo">
+        <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="ניווט ראשי">
+        <a href="about.html">אודות</a>
+        <a href="zimmerim.html">הצימרים</a>
+        <a href="pinukim.html">פינוקים</a>
+        <a href="spa.html">ספא</a>
+        <a href="hamakom.html">המקום</a>
+        <a href="galeria.html">גלריה</a>
+        <a href="mamlitzim.html">ממליצים</a>
+        <a href="hazmana.html" aria-current="page">הזמנה</a>
+        <a href="kesher.html" class="cta-contact">
+          <span>יצירת קשר</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="hazmana-hero" aria-labelledby="page-heading">
+      <div class="scene-night" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hazmana-hero-content">
+        <div class="ornament" aria-hidden="true">
+          <span class="ornament-line"></span>
+          <span class="ornament-dot"></span>
+          <span class="ornament-line"></span>
+        </div>
+        <span class="eyebrow">לילה ברוזמרין</span>
+        <h1 id="page-heading">בואו לשמור תאריך</h1>
+        <p>שיחה אחת ולא טופס. אנחנו עונים בעצמנו, תוך כמה שעות לכל היותר.</p>
+      </div>
+    </section>
+
+    <!-- ===== Trust strip ===== -->
+    <section class="trust-strip" aria-label="למה אצלנו">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3>מענה אישי</h3>
+          <p>בעלי המקום עונים — לא מוקד, לא בוט.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>מענה מהיר</h3>
+          <p>תוך כמה שעות, לרוב באותו יום.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 1-9 9-9 9s-9-8-9-9a4 4 0 0 1 8-1 4 4 0 0 1 8 1z"/></svg>
+          </div>
+          <h3>תאריכים גמישים</h3>
+          <p>ביטול חינם עד 14 יום. גמיש למשפחות.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Booking — phone + form side by side ===== -->
+    <section class="booking-wrap" aria-labelledby="booking-heading">
+      <h2 id="booking-heading" class="sr-only">הזמנת צימר</h2>
+
+      <!-- Right: Phone CTA -->
+      <div class="phone-side">
+        <span class="eyebrow">הדרך הכי טובה</span>
+        <h2>פשוט להרים טלפון.</h2>
+        <p>אנחנו עונים בעצמנו, בלי תור ובלי לחיצות. ואם תפסתם אותנו עם אורחים — נחזיר אליכם בתוך אותו יום.</p>
+        <p>בערב או בסופ״ש? עדיף ווטסאפ.</p>
+
+        <div class="phone-card">
+          <span class="phone-eyebrow">חייגו אלינו</span>
+          <a href="tel:0523666489" class="phone-num">052-3666489</a>
+          <p class="phone-meta">ראשון–חמישי · 09:00–21:00</p>
+          <div class="phone-buttons">
+            <a href="https://wa.me/972523666489" class="btn" target="_blank" rel="noopener noreferrer">ווטסאפ</a>
+            <a href="mailto:eitanblayberg@gmail.com" class="btn">אימייל</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left: Form -->
+      <div class="form-card">
+        <span class="eyebrow">או בכתב</span>
+        <h3>שלחו לנו פרטים</h3>
+        <p class="lead-line">זו לא הזמנה סופית, רק פתיחת שיחה. נחזור אליכם עם זמינות, מחירים, וכל מה שצריך.</p>
+
+        <form class="form-stack" onsubmit="event.preventDefault(); document.getElementById('form-success').hidden = false; this.hidden = true;" novalidate>
+
+          <div class="field-row">
+            <div class="field-block">
+              <label for="name"><span class="required">*</span>שם מלא</label>
+              <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+            </div>
+            <div class="field-block">
+              <label for="phone"><span class="required">*</span>טלפון</label>
+              <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" placeholder="050-1234567">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-block">
+              <label for="checkin"><span class="required">*</span>תאריך כניסה</label>
+              <input type="date" id="checkin" name="checkin" required aria-required="true">
+            </div>
+            <div class="field-block">
+              <label for="checkout"><span class="required">*</span>תאריך יציאה</label>
+              <input type="date" id="checkout" name="checkout" required aria-required="true">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-block">
+              <label for="guests">מספר אורחים</label>
+              <select id="guests" name="guests">
+                <option>2 מבוגרים</option>
+                <option>2 מבוגרים + 1 ילד</option>
+                <option>2 מבוגרים + 2 ילדים</option>
+                <option>אחר — נכתוב בהערות</option>
+              </select>
+            </div>
+            <div class="field-block">
+              <label for="treatment">מעוניינים בטיפול?</label>
+              <select id="treatment" name="treatment">
+                <option>אולי, נחליט במקום</option>
+                <option>כן, בהחלט</option>
+                <option>לא הפעם</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-block">
+            <label for="notes">הערות (לא חובה)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="יום הולדת? יום נישואין? משהו מיוחד שכדאי לדעת?"></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">
+              <span>שלח/י הודעה</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+            <p class="form-meta">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>הפרטים בטוחים ולא יועברו לאף גורם</span>
+            </p>
+          </div>
+        </form>
+
+        <div id="form-success" hidden role="status" aria-live="polite" style="text-align: center; padding: var(--space-l) var(--space-s);">
+          <h3 style="color: var(--rosemary); margin-bottom: var(--space-s); font-weight: 400;">תודה — קיבלנו</h3>
+          <p style="color: var(--basalt-soft);">נחזור אליכם בהקדם, בדרך כלל באותו יום.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo">
+          <img class="logo-mark" src="rosemary_desert_logo1.png" alt="מתחם רוזמרין · אירוח וספא">
+        </a>
+        <p>ארבעה צימרים וקליניקת ספא במושב עין יהב, ערבה תיכונה.</p>
+      </div>
+      <div class="footer-col"><h4>ניווט</h4><p><a href="about.html">אודות</a><br><a href="zimmerim.html">הצימרים</a><br><a href="pinukim.html">פינוקים</a><br><a href="spa.html">ספא</a><br><a href="hamakom.html">המקום</a><br><a href="galeria.html">גלריה</a><br><a href="mamlitzim.html">ממליצים</a><br><a href="hazmana.html">הזמנה</a><br><a href="kesher.html">יצירת קשר</a></p></div>
+      <div class="footer-col"><h4>צרו קשר</h4><p><a href="tel:0523666489">052-3666489</a><br><a href="https://wa.me/972523666489">ווטסאפ</a><br><a href="mailto:eitanblayberg@gmail.com">eitanblayberg@gmail.com</a></p></div>
+      <div class="footer-col"><h4>הגעה</h4><p>מושב עין יהב<br>ערבה תיכונה</p></div>
+    </div>
+    <div class="footer-bottom"><span>© כל הזכויות שמורות למתחם רוזמרין 2026</span><span class="footer-legal-links"><a href="accessibility.html">הצהרת נגישות</a><span aria-hidden="true">·</span><a href="privacy.html">מדיניות פרטיות</a></span><span class="credit">בנייה ועיצוב ע״י <a href="https://ombee.co.il" target="_blank" rel="noopener noreferrer" aria-label="לאתר OMBee"><img src="ombee-logo.png" alt="OMBee"></a></span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
