@@ -682,33 +682,6 @@ section { padding: var(--space-xl) 0; }
   text-shadow: 0 1px 6px rgba(26, 31, 42, 0.4);
 }
 
-/* Scroll hint */
-.scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(244, 232, 200, 0.85);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.scroll-hint::after {
-  content: '';
-  width: 1px; height: 40px;
-  background: currentColor;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
-  50%      { opacity: 1;   transform: scaleY(1); }
-}
-
 /* ===== Section: Doors ===== */
 .intro {
   text-align: center;
