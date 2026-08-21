@@ -1132,14 +1132,15 @@ footer {
   }
   .nav.open { transform: translateX(0); }
 
-  /* Spacer at top of drawer (under topbar) */
+  /* Drawer header — Rozmarin logo (under topbar) */
   .nav::before {
     content: '';
     display: block;
-    margin-top: 100px;
-    padding-bottom: var(--space-s);
+    margin: 92px var(--space-l) 0.75rem;
+    height: 112px;
+    background: url('images/rosemary_desert_logo1.png') no-repeat center / contain;
+    padding-bottom: var(--space-m);
     border-bottom: 1px solid rgba(61, 53, 48, 0.12);
-    margin-bottom: 0.5rem;
     flex-shrink: 0;
   }
 
