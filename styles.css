@@ -502,6 +502,7 @@ section { padding: var(--space-xl) 0; }
 /* Nav — desktop: horizontal inline */
 .nav { display: flex; gap: 1.8rem; font-size: 0.95rem; flex-wrap: wrap; }
 .nav-close { display: none; } /* visible only in the mobile drawer */
+.nav-home-logo { display: none; } /* visible only in the mobile drawer */
 
 /* CTA Contact Button — rectangular, clear hover */
 .cta-contact {
@@ -1133,16 +1134,32 @@ footer {
   }
   .nav.open { transform: translateX(0); }
 
-  /* Drawer header — Rozmarin logo, on the same row as the X */
+  /* Drawer header row — spacing + divider (logo link and X sit on it) */
   .nav::before {
     content: '';
     display: block;
     margin: 14px var(--space-l) 0.75rem;
     height: 42px;
-    background: url('images/rosemary_desert_logo1.png') no-repeat right center / contain;
     padding-bottom: var(--space-s);
     border-bottom: 1px solid rgba(61, 53, 48, 0.12);
     flex-shrink: 0;
+  }
+
+  /* Drawer logo — right side, clickable, back to homepage */
+  .nav .nav-home-logo {
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: var(--space-l);
+    height: 42px;
+    padding: 0;
+    border: 0;
+    z-index: 2;
+  }
+  .nav .nav-home-logo img {
+    height: 100%;
+    width: auto;
+    display: block;
   }
 
   /* Drawer close button — top left, aligned with the logo row */
@@ -1167,7 +1184,7 @@ footer {
   .nav-close svg { width: 20px; height: 20px; }
 
   /* Regular nav links — vertical, breathing, with right-side accent on hover */
-  .nav a:not(.cta-contact) {
+  .nav a:not(.cta-contact):not(.nav-home-logo) {
     display: block;
     position: relative;
     width: 100%;
@@ -1180,7 +1197,7 @@ footer {
     letter-spacing: 0.01em;
     transition: color 0.25s var(--ease), padding-right 0.25s var(--ease), background 0.25s var(--ease);
   }
-  .nav a:not(.cta-contact)::before {
+  .nav a:not(.cta-contact):not(.nav-home-logo)::before {
     content: '';
     position: absolute;
     top: 0; bottom: 0;
@@ -1191,14 +1208,14 @@ footer {
     transform-origin: center;
     transition: transform 0.3s var(--ease);
   }
-  .nav a:not(.cta-contact):hover,
-  .nav a:not(.cta-contact):focus-visible {
+  .nav a:not(.cta-contact):not(.nav-home-logo):hover,
+  .nav a:not(.cta-contact):not(.nav-home-logo):focus-visible {
     color: var(--rosemary);
     padding-right: calc(var(--space-l) + 8px);
     background: rgba(107, 122, 90, 0.04);
   }
-  .nav a:not(.cta-contact):hover::before,
-  .nav a:not(.cta-contact):focus-visible::before {
+  .nav a:not(.cta-contact):not(.nav-home-logo):hover::before,
+  .nav a:not(.cta-contact):not(.nav-home-logo):focus-visible::before {
     transform: scaleY(1);
   }
   .nav a::after { display: none; }
@@ -1251,7 +1268,7 @@ footer {
 @media (max-width: 480px) {
   .nav { width: 320px; }
   .nav::before { margin-top: 90px; }
-  .nav a:not(.cta-contact) { font-size: 1.08rem; padding: 1.1rem var(--space-m); }
+  .nav a:not(.cta-contact):not(.nav-home-logo) { font-size: 1.08rem; padding: 1.1rem var(--space-m); }
   .nav .cta-contact {
     width: calc(100% - 2 * var(--space-m));
     margin: auto var(--space-m) var(--space-m);

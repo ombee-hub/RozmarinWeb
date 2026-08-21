@@ -120,6 +120,14 @@
   closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
   nav.prepend(closeBtn);
 
+  // Drawer logo — links back to the homepage
+  const homeLogo = document.createElement('a');
+  homeLogo.className = 'nav-home-logo';
+  homeLogo.href = 'index.html';
+  homeLogo.setAttribute('aria-label', 'לדף הבית');
+  homeLogo.innerHTML = '<img src="images/rosemary_desert_logo1.png" alt="מתחם רוזמרין">';
+  nav.prepend(homeLogo);
+
   function open() {
     button.setAttribute('aria-expanded', 'true');
     nav.classList.add('open');
