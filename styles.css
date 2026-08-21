@@ -1129,29 +1129,29 @@ footer {
     transition: transform 0.4s var(--ease);
     box-shadow: -12px 0 50px rgba(26, 31, 42, 0.14);
     overflow-y: auto;
-    z-index: 55;
+    z-index: 70; /* above the topbar — hides the hamburger X so only the drawer X shows */
   }
   .nav.open { transform: translateX(0); }
 
-  /* Drawer header — Rozmarin logo */
+  /* Drawer header — Rozmarin logo, on the same row as the X */
   .nav::before {
     content: '';
     display: block;
-    margin: 78px var(--space-l) 0.75rem;
-    height: 68px;
+    margin: 14px var(--space-l) 0.75rem;
+    height: 42px;
     background: url('images/rosemary_desert_logo1.png') no-repeat center / contain;
-    padding-bottom: var(--space-m);
+    padding-bottom: var(--space-s);
     border-bottom: 1px solid rgba(61, 53, 48, 0.12);
     flex-shrink: 0;
   }
 
-  /* Drawer close button — top right, inside the menu */
+  /* Drawer close button — top right, aligned with the logo row */
   .nav-close {
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 16px;
+    top: 14px;
     right: 16px;
     width: 42px;
     height: 42px;
