@@ -112,6 +112,14 @@
   const nav = document.getElementById('primary-nav');
   if (!button || !nav) return;
 
+  // Close (X) button inside the drawer, top right
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'nav-close';
+  closeBtn.type = 'button';
+  closeBtn.setAttribute('aria-label', 'סגירת תפריט');
+  closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  nav.prepend(closeBtn);
+
   function open() {
     button.setAttribute('aria-expanded', 'true');
     nav.classList.add('open');
@@ -133,6 +141,9 @@
     e.stopPropagation();
     toggle();
   });
+
+  // Click X inside the drawer
+  closeBtn.addEventListener('click', close);
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
