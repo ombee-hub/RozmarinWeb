@@ -940,6 +940,7 @@ section { padding: var(--space-xl) 0; }
 }
 
 /* Testimonials carousel */
+.testi-carousel { position: relative; }
 .testi-track { display: grid; }
 .testi-slide {
   grid-area: 1 / 1;
@@ -961,19 +962,15 @@ section { padding: var(--space-xl) 0; }
   text-transform: uppercase;
   color: var(--basalt-soft);
 }
-.testi-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-s);
-  margin-top: var(--space-m);
-}
 .testi-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
   border: 0;
   background: transparent;
   padding: 0;
@@ -981,30 +978,17 @@ section { padding: var(--space-xl) 0; }
   cursor: pointer;
   transition: color 0.25s var(--ease), transform 0.25s var(--ease);
 }
+.testi-prev { right: -60px; }
+.testi-next { left: -60px; }
 .testi-btn:hover {
   color: var(--rosemary);
-  transform: scale(1.15);
+  transform: translateY(-50%) scale(1.2);
 }
-.testi-btn svg { width: 20px; height: 20px; }
-.testi-dots {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-}
-.testi-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 0;
-  padding: 0;
-  background: rgba(61, 53, 48, 0.2);
-  cursor: pointer;
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
-}
-.testi-dot:hover { background: var(--clay); }
-.testi-dot.is-active {
-  background: var(--rosemary);
-  transform: scale(1.25);
+.testi-btn svg { width: 22px; height: 22px; }
+
+@media (max-width: 760px) {
+  .testi-prev { right: -14px; }
+  .testi-next { left: -14px; }
 }
 
 /* ===== Weather widget ===== */

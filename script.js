@@ -112,26 +112,13 @@
   if (!carousel) return;
 
   const slides = carousel.querySelectorAll('.testi-slide');
-  const dotsWrap = carousel.querySelector('.testi-dots');
   let current = 0;
   let timer = null;
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'testi-dot' + (i === 0 ? ' is-active' : '');
-    dot.setAttribute('aria-label', 'המלצה ' + (i + 1));
-    dot.addEventListener('click', () => { goTo(i); restart(); });
-    dotsWrap.appendChild(dot);
-  });
-  const dots = dotsWrap.querySelectorAll('.testi-dot');
-
   function goTo(i) {
     slides[current].classList.remove('is-active');
-    dots[current].classList.remove('is-active');
     current = (i + slides.length) % slides.length;
     slides[current].classList.add('is-active');
-    dots[current].classList.add('is-active');
   }
 
   function restart() {
