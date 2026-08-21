@@ -1145,29 +1145,26 @@ footer {
     flex-shrink: 0;
   }
 
-  /* Drawer close button — top right, aligned with the logo row */
+  /* Drawer close button — top left, aligned with the logo row */
   .nav-close {
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 14px;
-    right: 16px;
+    left: 16px;
     width: 42px;
     height: 42px;
-    border-radius: 50%;
     background: transparent;
-    border: 1px solid rgba(61, 53, 48, 0.15);
+    border: 0;
+    padding: 0;
     color: var(--basalt);
     cursor: pointer;
-    transition: background 0.25s var(--ease), color 0.25s var(--ease);
+    transition: color 0.25s var(--ease), opacity 0.25s var(--ease);
     z-index: 2;
   }
-  .nav-close:hover {
-    background: var(--sand-deep);
-    color: var(--rosemary);
-  }
-  .nav-close svg { width: 18px; height: 18px; }
+  .nav-close:hover { color: var(--rosemary); }
+  .nav-close svg { width: 20px; height: 20px; }
 
   /* Regular nav links — vertical, breathing, with right-side accent on hover */
   .nav a:not(.cta-contact) {
