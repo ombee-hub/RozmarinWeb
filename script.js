@@ -106,6 +106,49 @@
   });
 })();
 
+// ===== Testimonials carousel (homepage) =====
+(function() {
+  const carousel = document.querySelector('.testi-carousel');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.testi-slide');
+  const dotsWrap = carousel.querySelector('.testi-dots');
+  let current = 0;
+  let timer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'testi-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'המלצה ' + (i + 1));
+    dot.addEventListener('click', () => { goTo(i); restart(); });
+    dotsWrap.appendChild(dot);
+  });
+  const dots = dotsWrap.querySelectorAll('.testi-dot');
+
+  function goTo(i) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 6500);
+  }
+
+  carousel.querySelector('.testi-next').addEventListener('click', () => { goTo(current + 1); restart(); });
+  carousel.querySelector('.testi-prev').addEventListener('click', () => { goTo(current - 1); restart(); });
+
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel.addEventListener('mouseleave', restart);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!reduceMotion.matches) restart();
+})();
+
 // ===== Cookie / storage consent banner (first visit) =====
 (function() {
   try {

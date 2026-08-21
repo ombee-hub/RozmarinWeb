@@ -119,14 +119,42 @@
     </a>
   </div>
 
-  <!-- ===== Testimonial ===== -->
-  <section class="testimonial">
+  <!-- ===== Testimonials carousel ===== -->
+  <section class="testimonial" aria-label="המלצות אורחים">
     <span class="quote-mark">״</span>
-    <blockquote>
-      הגענו עייפים. ביום השני כבר לא ידענו מה השעה. ביום השלישי לא רצינו לחזור.
-      זה לא צימר — זו הפסקה אמיתית.
-    </blockquote>
-    <cite>— דנה ויוסי, חיפה</cite>
+    <div class="testi-carousel">
+      <div class="testi-track">
+        <figure class="testi-slide is-active">
+          <blockquote>הגענו עייפים. ביום השני כבר לא ידענו מה השעה. ביום השלישי לא רצינו לחזור. זה לא צימר — זו הפסקה אמיתית.</blockquote>
+          <cite>— דנה ויוסי, חיפה</cite>
+        </figure>
+        <figure class="testi-slide">
+          <blockquote>הצימר עצמו פשוט יפהפה — עץ אמיתי, ג׳קוזי גדול, ומיטה שאי אפשר לקום ממנה. אבל מה שעשה את ההבדל זה השמיים בלילה.</blockquote>
+          <cite>— ענת ר., תל אביב</cite>
+        </figure>
+        <figure class="testi-slide">
+          <blockquote>הגענו עם שני ילדים בני 8 ו-11. דאגנו שיהיה משעמם. בסוף הם רצו להישאר עוד יום. הבריכה, הדק, הכוכבים — הכל היה הרפתקה בשבילם.</blockquote>
+          <cite>— משפחת אלון, רמת גן</cite>
+        </figure>
+        <figure class="testi-slide">
+          <blockquote>בפעם הראשונה הזמנתי טיפול אחד. בפעם השנייה הגעתי בשביל הטיפולים, והצימר היה בונוס. שירה היא קוסמת.</blockquote>
+          <cite>— מירב ל., באר שבע</cite>
+        </figure>
+        <figure class="testi-slide">
+          <blockquote>ענו לי בווטסאפ תוך עשר דקות, גם בשבת בערב. נדיר. אף אחד שאני מכירה לא יצא מרוצה פחות אחרי ביקור אצלם.</blockquote>
+          <cite>— רן מ., מודיעין</cite>
+        </figure>
+      </div>
+      <div class="testi-controls">
+        <button type="button" class="testi-btn testi-prev" aria-label="ההמלצה הקודמת">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="testi-dots" role="tablist" aria-label="בחירת המלצה"></div>
+        <button type="button" class="testi-btn testi-next" aria-label="ההמלצה הבאה">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+    </div>
   </section>
 
   <div class="divider"></div>
