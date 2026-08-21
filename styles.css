@@ -1139,7 +1139,7 @@ footer {
     display: block;
     margin: 14px var(--space-l) 0.75rem;
     height: 42px;
-    background: url('images/rosemary_desert_logo1.png') no-repeat center / contain;
+    background: url('images/rosemary_desert_logo1.png') no-repeat right center / contain;
     padding-bottom: var(--space-s);
     border-bottom: 1px solid rgba(61, 53, 48, 0.12);
     flex-shrink: 0;
