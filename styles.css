@@ -94,6 +94,7 @@ html { scroll-behavior: smooth; }
 .cookie-decline {
   cursor: pointer;
   padding: 0.6rem 1.6rem;
+  border-radius: 10px;
   font-family: 'Assistant', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
@@ -602,7 +603,7 @@ section { padding: var(--space-xl) 0; }
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  border-radius: 2px;
+  border-radius: 10px;
   border: 1px solid var(--rosemary);
   white-space: nowrap;
   flex-shrink: 0;
@@ -999,6 +1000,7 @@ section { padding: var(--space-xl) 0; }
   gap: 0.5rem;
   padding: 0.9rem 2rem;
   border: 1px solid currentColor;
+  border-radius: 10px;
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
@@ -1324,7 +1326,7 @@ footer {
     gap: 0.6rem;
     font-size: 1.02rem;
     font-weight: 500;
-    border-radius: 2px;
+    border-radius: 10px;
     box-shadow: 0 6px 18px rgba(107, 122, 90, 0.22);
     flex-shrink: 0;
   }
@@ -1352,7 +1354,6 @@ footer {
 /* Small phones */
 @media (max-width: 480px) {
   .nav { width: 320px; }
-  .nav::before { margin-top: 90px; }
   .nav a:not(.cta-contact):not(.nav-home-logo) { font-size: 1.08rem; padding: 1.1rem var(--space-m); }
   .nav .cta-contact {
     width: calc(100% - 2 * var(--space-m));
@@ -1364,7 +1365,7 @@ footer {
 @media (max-width: 600px) {
   .topbar-inner { padding: 0.55rem var(--space-s); }
   .topbar .logo-mark { height: 44px; }
-  .nav { width: 280px; padding: 90px var(--space-m) var(--space-m); }
+  .nav { width: 280px; }
   .footer-inner { grid-template-columns: 1fr; }
   section { padding: var(--space-l) 0; }
   .hero { min-height: 480px; }
