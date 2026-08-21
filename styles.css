@@ -44,6 +44,91 @@
 html { scroll-behavior: smooth; }
 
 /* ============================================================
+   COOKIE / STORAGE CONSENT BANNER — first visit
+   ============================================================ */
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 95;
+  max-width: 420px;
+  background: var(--sand-light);
+  border: 1px solid rgba(61, 53, 48, 0.15);
+  box-shadow: 0 14px 44px rgba(26, 31, 42, 0.22);
+  padding: var(--space-s) var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-family: 'Assistant', sans-serif;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.cookie-banner.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cookie-banner-text strong {
+  display: block;
+  color: var(--basalt);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+.cookie-banner-text p {
+  color: var(--basalt-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.cookie-banner-text a {
+  color: var(--rosemary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cookie-banner-text a:hover { color: var(--clay-dark); }
+.cookie-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+.cookie-accept,
+.cookie-decline {
+  cursor: pointer;
+  padding: 0.6rem 1.6rem;
+  font-family: 'Assistant', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.cookie-accept {
+  background: var(--rosemary);
+  color: #FFFFFF;
+  border: 1px solid var(--rosemary);
+}
+.cookie-accept:hover {
+  background: #5C6B4D;
+  transform: translateY(-1px);
+}
+.cookie-decline {
+  background: transparent;
+  color: var(--basalt-soft);
+  border: 1px solid rgba(61, 53, 48, 0.25);
+}
+.cookie-decline:hover {
+  color: var(--basalt);
+  border-color: var(--basalt-soft);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    right: 16px;
+    left: 16px;
+    bottom: 90px; /* clear the accessibility button */
+    max-width: none;
+  }
+}
+
+/* ============================================================
    ACCESSIBILITY WIDGET — Israeli standard style
    ============================================================ */
 

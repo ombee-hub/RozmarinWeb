@@ -106,6 +106,40 @@
   });
 })();
 
+// ===== Cookie / storage consent banner (first visit) =====
+(function() {
+  try {
+    if (localStorage.getItem('cookie-consent')) return;
+  } catch (e) {
+    return; // storage blocked — can't remember consent, skip the banner
+  }
+
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.setAttribute('role', 'region');
+  banner.setAttribute('aria-label', 'הודעה על שמירת מידע');
+  banner.innerHTML = `
+    <div class="cookie-banner-text">
+      <strong>רגע לפני שממשיכים 🍪</strong>
+      <p>האתר שומר מידע במכשירכם (עוגיות ואחסון מקומי) כדי לזכור את ההעדפות שלכם ולשפר את חוויית הגלישה. <a href="privacy.html">למדיניות הפרטיות</a></p>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-accept">אישור</button>
+      <button type="button" class="cookie-decline">דחייה</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+  requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
+
+  function dismiss(choice) {
+    try { localStorage.setItem('cookie-consent', choice); } catch (e) {}
+    banner.classList.remove('show');
+    setTimeout(() => banner.remove(), 500);
+  }
+  banner.querySelector('.cookie-accept').addEventListener('click', () => dismiss('accepted'));
+  banner.querySelector('.cookie-decline').addEventListener('click', () => dismiss('declined'));
+})();
+
 // ===== Mobile navigation toggle =====
 (function() {
   const button = document.querySelector('.nav-toggle');
