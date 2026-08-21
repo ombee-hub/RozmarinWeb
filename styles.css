@@ -54,6 +54,7 @@ html { scroll-behavior: smooth; }
   max-width: 420px;
   background: var(--sand-light);
   border: 1px solid rgba(61, 53, 48, 0.15);
+  border-radius: 14px;
   box-shadow: 0 14px 44px rgba(26, 31, 42, 0.22);
   padding: var(--space-s) var(--space-m);
   display: flex;
@@ -791,6 +792,7 @@ section { padding: var(--space-xl) 0; }
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: 14px;
   background: var(--basalt);
   cursor: pointer;
   transition: transform 0.6s var(--ease);
