@@ -1069,6 +1069,16 @@ footer {
   padding: var(--space-l) var(--space-m) var(--space-m);
   border-top: var(--rule);
 }
+.footer-map-title {
+  max-width: var(--max-w);
+  margin: 0 auto var(--space-m);
+  padding-bottom: var(--space-s);
+  border-bottom: 1px solid rgba(61, 53, 48, 0.15);
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  letter-spacing: 0.04em;
+  color: var(--basalt);
+}
 .footer-inner {
   max-width: var(--max-w);
   margin: 0 auto;
