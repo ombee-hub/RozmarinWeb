@@ -189,7 +189,7 @@
   homeLogo.className = 'nav-home-logo';
   homeLogo.href = 'index.html';
   homeLogo.setAttribute('aria-label', 'לדף הבית');
-  homeLogo.innerHTML = '<img src="images/rosemary_desert_logo1.png" alt="מתחם רוזמרין">';
+  homeLogo.innerHTML = '<img src="images/rosemary_desert_logo.png" alt="מתחם רוזמרין">';
   nav.prepend(homeLogo);
 
   function open() {
