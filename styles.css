@@ -744,16 +744,6 @@ section { padding: var(--space-xl) 0; }
   justify-content: flex-end;
   padding-bottom: var(--space-xl);
 }
-.hero-eyebrow {
-  font-family: 'Assistant', sans-serif;
-  font-size: 0.92rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--sand-light);
-  font-weight: 500;
-  margin-bottom: var(--space-m);
-  text-shadow: 0 1px 4px rgba(26, 31, 42, 0.4);
-}
 .hero h1 {
   font-size: var(--type-display);
   color: var(--sand-light);
