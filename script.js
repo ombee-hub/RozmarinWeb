@@ -136,10 +136,14 @@
   if (!reduceMotion.matches) restart();
 })();
 
-// ===== Cookie / storage consent banner (first visit) =====
+// ===== Cookie / storage consent banner (first visit, homepage only) =====
 (function() {
+  if (!document.body.hasAttribute('data-cookie-banner')) return; // only pages that opt in (the homepage)
+  const KEY = 'cookie-consent-v2'; // bump to show the banner again after the text changes
   try {
-    if (localStorage.getItem('cookie-consent')) return;
+    // index.html?cookies clears the saved choice so the banner can be tested again
+    if (new URLSearchParams(location.search).has('cookies')) localStorage.removeItem(KEY);
+    if (localStorage.getItem(KEY)) return;
   } catch (e) {
     return; // storage blocked — can't remember consent, skip the banner
   }
@@ -151,7 +155,7 @@
   banner.innerHTML = `
     <div class="cookie-banner-text">
       <strong>רגע לפני שממשיכים 🍪</strong>
-      <p>האתר שומר מידע במכשירכם (עוגיות ואחסון מקומי) כדי לזכור את ההעדפות שלכם ולשפר את חוויית הגלישה. <a href="privacy.html">למדיניות הפרטיות</a></p>
+      <p>אתר זה משתמש בעוגיות (Cookies) כדי לשפר את חוויית הגלישה שלך. לפרטים נוספים ניתן לעיין <a href="privacy.html">במדיניות הפרטיות</a>.</p>
     </div>
     <div class="cookie-actions">
       <button type="button" class="cookie-accept">אישור</button>
@@ -162,7 +166,7 @@
   requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
 
   function dismiss(choice) {
-    try { localStorage.setItem('cookie-consent', choice); } catch (e) {}
+    try { localStorage.setItem(KEY, choice); } catch (e) {}
     banner.classList.remove('show');
     setTimeout(() => banner.remove(), 500);
   }
@@ -189,7 +193,7 @@
   homeLogo.className = 'nav-home-logo';
   homeLogo.href = 'index.html';
   homeLogo.setAttribute('aria-label', 'לדף הבית');
-  homeLogo.innerHTML = '<img src="images/rosemary_desert_logo.png" alt="מתחם רוזמרין">';
+  homeLogo.innerHTML = '<img src="images/rosemary_desert_logo.webp" alt="מתחם רוזמרין">';
   nav.prepend(homeLogo);
 
   function open() {

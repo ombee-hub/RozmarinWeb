@@ -631,7 +631,7 @@ section { padding: var(--space-xl) 0; }
   stroke-linejoin: round;
   transition: transform 0.3s var(--ease);
 }
-.cta-contact:hover svg { transform: translateX(-5px) rotate(-12deg); }
+.cta-contact:hover svg { transform: translateX(-5px) rotate(12deg); }
 .nav a {
   position: relative;
   padding: 0.25rem 0;
@@ -1242,7 +1242,7 @@ footer {
     gap: var(--space-s);
     padding: 0.6rem var(--space-m);
   }
-  .topbar .logo-mark { height: 52px; }
+  .topbar .logo-mark { height: 64px; }
 
   /* Hide topbar CTA on mobile/tablet — it's now inside the drawer */
   .topbar-inner > .cta-contact { display: none; }
@@ -1419,7 +1419,7 @@ footer {
 /* Phones */
 @media (max-width: 600px) {
   .topbar-inner { padding: 0.55rem var(--space-s); }
-  .topbar .logo-mark { height: 44px; }
+  .topbar .logo-mark { height: 62px; }
   .nav { width: 280px; }
   .footer-inner { grid-template-columns: 1fr; }
   section { padding: var(--space-l) 0; }
@@ -1427,14 +1427,15 @@ footer {
   .hero h1 { font-size: clamp(2.2rem, 9vw, 3.5rem); }
 }
 
+@media (max-width: 500px) {
+  .topbar .logo-mark { height: 58px; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
 /* Very small phones */
 @media (max-width: 380px) {
-  .topbar .logo-mark { height: 38px; }
+  .topbar .logo-mark { height: 52px; }
   .nav-toggle { width: 42px; height: 42px; }
   .nav-toggle .bar { width: 22px; }
   .nav { width: 260px; padding: 80px var(--space-m) var(--space-m); }
-}
-@media (max-width: 500px) {
-  .topbar .logo-mark { height: 32px; }
-  .footer-inner { grid-template-columns: 1fr; }
 }
