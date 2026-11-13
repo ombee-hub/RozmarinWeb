@@ -454,8 +454,10 @@ section { padding: var(--space-xl) 0; }
   padding: 0 var(--space-m);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 9.5rem;
+  /* Desktop: headline centred in the sky, above the dunes, never under the header */
+  justify-content: center;
+  padding-top: var(--space-m);
+  padding-bottom: 34vh;
 }
 .hero h1 {
   font-size: var(--type-display);
