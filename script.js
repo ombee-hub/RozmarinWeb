@@ -49,8 +49,8 @@
       <svg class="cookie-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 3 3 0 0 1-3.5-3A3 3 0 0 1 14 5.5 3 3 0 0 1 12 3z"/><circle cx="8.5" cy="11" r="1"/><circle cx="12" cy="15.5" r="1"/><circle cx="15.5" cy="13" r="1"/><circle cx="9" cy="16" r=".6"/></svg>
       <p>אתר זה משתמש בעוגיות (Cookies) כדי לשפר את חוויית הגלישה שלך. לפרטים נוספים ניתן לעיין <a href="privacy.html">במדיניות הפרטיות</a>.</p>
       <div class="cookie-actions">
-        <button type="button" class="cookie-accept">אישור</button>
-        <button type="button" class="cookie-decline">דחייה</button>
+        <button type="button" class="cookie-accept">מאשר/ת</button>
+        <button type="button" class="cookie-decline">ביטול</button>
       </div>
     </div>
   `;

@@ -86,7 +86,7 @@ html { scroll-behavior: smooth; }
 }
 .cookie-ico circle { fill: var(--rosemary); stroke: none; }
 .cookie-banner p {
-  flex: 1;
+  flex: 0 1 auto; /* don't stretch, so the buttons sit right after the privacy link */
   margin: 0;
   color: var(--basalt);
   font-size: 1rem;
