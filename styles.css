@@ -455,7 +455,7 @@ section { padding: var(--space-xl) 0; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: var(--space-xl);
+  padding-bottom: 9.5rem;
 }
 .hero h1 {
   font-size: var(--type-display);
@@ -1138,6 +1138,8 @@ footer {
   section { padding: var(--space-l) 0; }
   .hero { min-height: 480px; }
   .hero h1 { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  /* Phones: headline at the top of the sky, clear of the dunes */
+  .hero-content { justify-content: flex-start; padding-top: var(--space-l); padding-bottom: 0; }
 }
 
 @media (max-width: 500px) {
