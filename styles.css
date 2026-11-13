@@ -53,6 +53,7 @@ html { scroll-behavior: smooth; }
   right: 16px;
   bottom: 16px;
   margin: 0 auto;
+  width: fit-content; /* hug the content — no empty strip at the end */
   max-width: 1240px;
   background: #FFFFFF;
   color: var(--basalt);
@@ -139,7 +140,7 @@ html { scroll-behavior: smooth; }
 body.has-cookie-banner .ombee-a11y-btn { bottom: calc(var(--cookie-h, 0px) + 32px); }
 
 @media (max-width: 760px) {
-  .cookie-banner { left: 10px; right: 10px; bottom: 10px; border-radius: 16px; }
+  .cookie-banner { left: 10px; right: 10px; bottom: 10px; width: auto; border-radius: 16px; }
   .cookie-inner { flex-wrap: wrap; gap: 12px 14px; padding: 16px; }
   .cookie-ico { width: 30px; height: 30px; }
   .cookie-banner p { flex: 1 1 calc(100% - 46px); font-size: 0.95rem; }
